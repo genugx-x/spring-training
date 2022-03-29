@@ -1,7 +1,7 @@
 package com.genug.spring.training.jwt.controller;
 
-import com.genug.jwt.model.dto.MessageDto;
-import com.genug.jwt.security.TokenProvider;
+import com.genug.spring.training.jwt.model.dto.MessageDto;
+import com.genug.spring.training.jwt.security.TokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

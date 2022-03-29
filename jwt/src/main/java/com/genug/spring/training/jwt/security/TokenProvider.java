@@ -1,6 +1,5 @@
 package com.genug.spring.training.jwt.security;
 
-import com.genug.jwt.model.domain.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -1,6 +1,6 @@
 package com.genug.spring.training.jwt.config;
 
-import com.genug.jwt.security.JwtAuthenticationFilter;
+import com.genug.spring.training.jwt.security.JwtAuthenticationFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

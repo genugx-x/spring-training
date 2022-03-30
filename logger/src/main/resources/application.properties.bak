@@ -1,0 +1,15 @@
+
+logging.level.root=INFO
+#logging.level.com.genug.logger=INFO
+#logging.level.com.genug.logger.level1=ERROR
+#logging.level.com.genug.logger.level1.level2=WARN
+#logging.level.com.genug.logger.level1.level2.level3=INFO
+#logging.level.com.genug.logger.level1.level2.level3.level4=DEBUG
+
+logging.file.name=info
+logging.file.path=C:/data/test/log
+logging.charset.file=UTF-8
+logging.pattern.file=[%yellow(%d{yyyy-MM-dd HH:mm:ss})][%highlight(%-5level)][%green(%C.%M\(%L\))]-'%m'%n
+logging.logback.rollingpolicy.max-file-size=10MB
+logging.logback.rollingpolicy.file-name-pattern=${logging.file.name}.%d{uuuuMMdd}.%i.log
+logging.

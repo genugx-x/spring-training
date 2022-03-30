@@ -1,0 +1,23 @@
+
+#logging.level.root=INFO
+#logging.level.com.genug.logger=INFO
+#logging.level.com.genug.logger.level1=ERROR
+#logging.level.com.genug.logger.level1.level2=WARN
+#logging.level.com.genug.logger.level1.level2.level3=INFO
+#logging.level.com.genug.logger.level1.level2.level3.level4=DEBUG
+logging:
+  pattern:
+    # log 파일 입력 포맷
+    file: "%-4relative %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n"
+    # console 입력 포맷
+    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss}[%thread] %logger[%method:%line] - %msg%n"
+  logback:
+    rollingpolicy:
+      file-name-pattern: "${LOG_FILE}.%d{yyyy-MM-dd}_%i.zip"
+      # logging.file.name 의 로그파일이 설정한 MAX 크기가 된 경우
+      max-file-size: 1MB
+  file:
+    #path: "C:/data/test/log"
+    name: "C:/data/test/log/info.log"
+  level:
+    root: INFO

@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  # RabbitMQ
+  rabbitmq:
+    image: 'rabbitmq:3-management-alpine'
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - 15672:15672
+    volumes:
+      - /projects/rabbitmq/var:/var/lib/rabbitmq
+      - /projects/rabbitmq/config/rabbitmq.config:/etc/rabbitmq/rabbitmq.config
+    environment:
+      RABBITMQ_DEFAULT_USER: root
+      RABBITMQ_DEFAULT_PASS: 비밀번호
+networks:
+  default:
+    external: true
+    name: qsol-gw-net

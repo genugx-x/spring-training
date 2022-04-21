@@ -1,4 +1,5 @@
-package com.genug.spring.ex01;
+package com.genug.spring.training.orm.ex01;
+
 
 import lombok.Data;
 
@@ -13,9 +14,10 @@ import javax.persistence.Table;
 public class Member {
 
     @Id
+    @Column(name="ID")
     private String id;
 
-    @Column(name ="NAME")
+    @Column(name="NAME")
     private String name;
 
     // 매핑 정보가 없는 필드 - 자동으로 DB와 매핑됨

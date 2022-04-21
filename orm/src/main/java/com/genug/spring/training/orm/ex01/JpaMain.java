@@ -1,19 +1,19 @@
-package com.genug.spring.ex01;
+package com.genug.spring.training.orm.ex01;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.List;
 
 @Slf4j
 @Component
-public class JpaRunner implements ApplicationRunner {
+public class JpaMain {
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public static void main (String[] args) {
         log.info("JpaRunner run...");
 
         // 엔티티 매니저 팩토리 - 생성
@@ -28,6 +28,7 @@ public class JpaRunner implements ApplicationRunner {
             logic(em);
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();
         } finally {
             em.close();
@@ -38,25 +39,30 @@ public class JpaRunner implements ApplicationRunner {
 
     // 비즈니스 로직
     private static void logic(EntityManager em) {
-        String id = "id1";
+        String id = "id3";
         Member member = new Member();
         member.setId(id);
-        member.setName("SeongBeom");
-        member.setAge(33);
+        member.setName("WooJoo");
+        member.setAge(36);
 
         // 등록
         em.persist(member);
 
-        // 수정
-        member.setAge(23);
-
-
         Member findMember = em.find(Member.class, id);
         log.info("{}", findMember);
 
-        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-        log.info("{}", members);
+        // 수정
+        member.setAge(13);
 
-        // em.remove(member);
+        // JPQL (Persistence Query Language) - 엔티티 객체(클래스와 필드)를 대상으로 쿼리
+        // SQL - 데이터베이스 테이블을 대상으로 쿼리
+        List<Member> members = em
+                .createQuery("select m from Member m", Member.class)
+                //                  ↑ JPQL - 회원 엔티티 객체를 의미, DB의 MEMBER 테이블이 아니다.
+                .getResultList();
+        log.info("{}", members);
+        // JPQL은 DB 테이블을 전혀 알지 못한다.
+
+        em.remove(member);
     }
 }

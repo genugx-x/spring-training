@@ -1,4 +1,4 @@
-package com.genug.spring.training.orm.ex01;
+package com.genug.spring.training.orm;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 @Slf4j
 @Component
@@ -26,7 +25,7 @@ public class JpaMain {
         try {
             tx.begin();
             logic(em);
-            tx.commit();
+            tx.commit(); // 영속성 컨텍스트 플러시
         } catch (Exception e) {
             e.printStackTrace();
             tx.rollback();
@@ -39,40 +38,40 @@ public class JpaMain {
 
     // 비즈니스 로직
     private static void logic(EntityManager em) {
-        String id = "id3";
+        String id = "id1";
         Member member = new Member();
         member.setId(id);
-        member.setName("WooJoo");
-        member.setAge(36);
+        member.setName("성범");
+        member.setAge(33);
 
         // 등록 - 1차 캐시 저장
         em.persist(member);
 
         // 회원 엔티티를 영속석 컨텍스트에서 분리, 준영속 상태
-        em.detach(member);
+        // em.detach(member);
 
         // 준영속성 상태의 엔티티를 다시 영속성으로 변경
-        em.merge(member);
+        // em.merge(member);
 
         // 메모리의 1차 캐시에서 조회
         Member findMember = em.find(Member.class, id);
-        log.info("{}", findMember);
+        // log.info("{}", findMember);
 
         // 수정
         member.setAge(13);
 
         // JPQL (Persistence Query Language) - 엔티티 객체(클래스와 필드)를 대상으로 쿼리
         // SQL - 데이터베이스 테이블을 대상으로 쿼리
-        List<Member> members = em
-                .createQuery("select m from Member m", Member.class)
-                                            //  ↑ JPQL - 회원 엔티티 객체를 의미, DB의 MEMBER 테이블이 아니다.
-                .getResultList();
-        log.info("{}", members);
+//        List<Member> members = em
+//                .createQuery("select m from Member m", Member.class)
+//                                            //  ↑ JPQL - 회원 엔티티 객체를 의미, DB의 MEMBER 테이블이 아니다.
+//                .getResultList();
+//        log.info("{}", members);
         // JPQL은 DB 테이블을 전혀 알지 못한다.
 
-        em.clear(); // 영속성 컨테스트에 있는 모든 것이 초기화 - 1차 캐시에 있던 엔티티들이 모두 준영속 상태가 된다.
+        // em.clear(); // 영속성 컨테스트에 있는 모든 것이 초기화 - 1차 캐시에 있던 엔티티들이 모두 준영속 상태가 된다.
 
-        em.remove(member);
+        // em.remove(member);
 
     }
 }

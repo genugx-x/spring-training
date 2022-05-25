@@ -2,14 +2,17 @@ package com.genug.spring.ex01;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Entity
 @Table(name="MEMBER")
 public class Member {
+
     @Id
-    @Column(name = "id", nullable = false)
     private String id;
 
     @Column(name ="NAME")
@@ -17,5 +20,4 @@ public class Member {
 
     // 매핑 정보가 없는 필드 - 자동으로 DB와 매핑됨
     private Integer age;
-
 }

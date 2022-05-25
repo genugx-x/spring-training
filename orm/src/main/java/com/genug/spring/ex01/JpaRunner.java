@@ -28,6 +28,7 @@ public class JpaRunner implements ApplicationRunner {
             logic(em);
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();
         } finally {
             em.close();
@@ -38,9 +39,10 @@ public class JpaRunner implements ApplicationRunner {
 
     // 비즈니스 로직
     private static void logic(EntityManager em) {
-        String id = "id1";
+        // String id = "1";
         Member member = new Member();
-        member.setId(id);
+        // member.setId(1L);
+        member.setId("id1");
         member.setName("SeongBeom");
         member.setAge(33);
 
@@ -51,9 +53,10 @@ public class JpaRunner implements ApplicationRunner {
         member.setAge(23);
 
 
-        Member findMember = em.find(Member.class, id);
+        Member findMember = em.find(Member.class, member.getId());
         log.info("{}", findMember);
 
+        log.info("????");
         List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
         log.info("{}", members);
 

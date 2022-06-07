@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class SequenceGeneratorConfiguration {
 
     // 메서드 명과 동일한 이름의 빈을 생성한다. 이름을 지정하는 경우에는 속성 코드 추가
-    @Bean(name = "mys1")
+    @Bean
     public SequenceGenerator sequenceGenerator() {
         SequenceGenerator seqgen = new SequenceGenerator();
         seqgen.setPrefix("30");
